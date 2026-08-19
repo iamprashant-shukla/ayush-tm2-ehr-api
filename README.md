@@ -1,61 +1,89 @@
-# AYUSH TM2 EHR API
+# AYUSH TM2 EHR API & Multilingual Fuzzy Search Engine
 
-Backend service and Supabase database integration mapping **AYUSH NAMASTE Portal** terminology to **WHO ICD-11 Traditional Medicine Module 2 (TM2)** codes for EHR-compliant Electronic Health Record (EHR) systems in India.
+Full-stack microservice and Supabase database integration mapping **AYUSH NAMASTE Portal** terminology to **WHO ICD-11 Traditional Medicine Module 2 (TM2)** codes for ABDM-compliant Electronic Health Record (EHR) systems in India.
 
-## Overview
+## 🚀 Features
 
-Standardizing traditional medicine terminology (Ayurveda, Siddha, Unani) is essential for interoperable healthcare records under India's Digital Health Mission (ABDM). This project provides:
-- Database schemas for AYUSH diagnostic and terminology codes (`Namaste_code`).
-- Mapping structures between NAMASTE terms (English, Devanagari, Hinglish) and WHO ICD-11 TM2.
-- Local Supabase development configuration and automated migrations.
+- **Multilingual Fuzzy Search Engine**: Fast real-time search across English, Devanagari script, and phonetic Hinglish.
+- **WHO ICD-11 TM2 Mapping**: Instant cross-referencing between AYUSH diagnostic entities and WHO classification codes (`SR11`, `SQ00`, `SN49`, etc.).
+- **EHR API Bridge**: Standardized `GET /api/search?q=:query` endpoint returning structured JSON payloads for ABDM integration.
+- **Clean UI**: Minimalist search interface with autocomplete dropdown and JSON viewer.
 
-## Repository Structure
+---
 
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router, TypeScript)
+- **Database**: [Supabase](https://supabase.com/) (PostgreSQL with `pg_trgm` extension & GIN indexes)
+- **Styling**: Vanilla CSS design system
+
+---
+
+## 📦 Getting Started for Developers / Teammates
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/iamprashant-shukla/ayush-tm2-ehr-api.git
+cd ayush-tm2-ehr-api
 ```
-.
-├── supabase/
-│   ├── config.toml       # Supabase CLI project configuration
-│   └── migrations/       # Database migrations for tables & indexes
-├── .gitignore
-└── README.md
+
+### 2. Install Dependencies
+```bash
+npm install
 ```
 
-## Schema: `Namaste_code`
+### 3. Setup Environment Variables
+Create a file named `.env.local` in the root directory and add the Supabase project credentials:
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
 
-| Column | Type | Description |
-| :--- | :--- | :--- |
-| `Sr No.` | `bigint` | Primary Key |
-| `TM2 Code` | `varchar` | WHO ICD-11 TM2 classification code |
-| `Ayurveda Code` | `varchar` | AYUSH Ayurveda terminology code |
-| `Name English` | `varchar` | Term name in English |
-| `Namc Term Devanagari` | `varchar` | Term name in Devanagari script |
-| `Hinglish` | `varchar` | Phonetic Hinglish representation |
+### 4. Run Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the search interface.
 
-## Local Setup
+---
 
-### Prerequisites
-- Node.js (v18+)
-- Supabase CLI
+## 📡 API Reference
 
-### Setup Instructions
+### Search Endpoint: `GET /api/search`
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/iamprashant-shukla/ayush-tm2-ehr-api.git
-   cd ayush-tm2-ehr-api
-   ```
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `q` | `string` | **Yes** | Search term in English, Devanagari, Hinglish, TM2 code, or Ayurveda code |
 
-2. **Initialize & Link Supabase**
-   ```bash
-   npx supabase login
-   npx supabase link --project-ref <your-project-ref>
-   ```
+#### Example Request:
+```bash
+curl -X GET "http://localhost:3000/api/search?q=Vata"
+```
 
-3. **Apply Database Migrations**
-   ```bash
-   npx supabase db push
-   ```
+#### Example Response:
+```json
+{
+  "success": true,
+  "count": 50,
+  "data": [
+    {
+      "Sr No.": 1,
+      "TM2 Code": "SR11",
+      "Ayurveda Code": "AAA-1",
+      "Name English": "Accumulation of Vata pattern (TM2)",
+      "Namc Term Devanagari": "वातसञ्चयः",
+      "Hinglish": "Vatasanchayah"
+    }
+  ]
+}
+```
 
-## License
+---
+
+## 🔒 Security
+
+All environment files (`.env`, `.env.local`, etc.) are ignored by Git to protect database credentials.
+
+## 📄 License
 
 MIT
