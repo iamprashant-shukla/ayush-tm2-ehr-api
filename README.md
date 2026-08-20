@@ -8,18 +8,18 @@ Sangam is a full-stack platform and microservice mapping **AYUSH NAMASTE Portal*
 
 ## 🚀 Key Features
 
-- 🔍 **Multilingual Fuzzy Autocomplete**: Real-time debounced search matching across English terminology, Devanagari script, phonetic Hinglish transliteration, AYUSH NAMASTE codes, and WHO ICD-11 TM2 codes via PostgreSQL `pg_trgm` GIN indexing.
-- 🌐 **Dual Coding & Interoperability**: Automatic cross-referencing between AYUSH diagnostic concepts (`AAA-1`, etc.) and WHO classification codes (`SR11`, `SQ00`, `SN49`, etc.).
+- 🔍 **Multilingual Fuzzy Autocomplete** — Debounced real-time search across English, Devanagari, Hinglish, AYUSH NAMASTE codes, and WHO ICD-11 TM2 codes using PostgreSQL `pg_trgm` GIN indexing.
+- 🌐 **Dual Coding & Interoperability** — Automatic cross-referencing between AYUSH diagnostic concepts (e.g. `AAA-1`) and WHO classification codes (e.g. `SR11`, `SQ00`, `SN49`).
 - 📋 **Interactive FHIR R4 Generator**:
-  - Two-pane workspace with live concept inspector.
-  - Configurable clinical status (`active`, `recurrence`, `relapse`, `inactive`, `remission`, `resolved`).
-  - Patient / ABHA ID integration (e.g. `ABHA-12-3456-7890`).
-  - Generates ABDM & HL7 FHIR R4 `Condition` resources with dual-coded terminology (`http://namaste.ayush.gov.in/codes` and `http://id.who.int/icd/release/11/mms`).
+  - Two-pane workspace with a live concept inspector.
+  - Configurable clinical status: `active`, `recurrence`, `relapse`, `inactive`, `remission`, `resolved`.
+  - Patient / ABHA ID support (e.g. `ABHA-12-3456-7890`).
+  - Generates ABDM-compliant HL7 FHIR R4 `Condition` resources with dual-coded terminology (`http://namaste.ayush.gov.in/codes` & `http://id.who.int/icd/release/11/mms`).
 - 🎨 **Modern Split Workspace UI**:
   - Pill search bar with badge-highlighted autocomplete dropdown.
   - Interactive FHIR condition configuration card.
-  - Syntax-highlighted JSON viewer with single-click copy and animated toast notifications.
-- ⚡ **Standardized REST API**: High-performance `GET /api/search?q=:query` endpoint returning structured payloads for EHR systems.
+  - Syntax-highlighted JSON viewer with one-click copy and animated toast notifications.
+- ⚡ **Standardized REST API** — High-performance `GET /api/search?q=:query` endpoint returning structured AYUSH + ICD-11 payloads for EHR integration.
 
 ---
 
@@ -157,5 +157,4 @@ Environment credentials (`.env`, `.env.local`) are excluded from version control
 
 MIT
 
-<!-- PR Test: Key Features Verified -->
 
