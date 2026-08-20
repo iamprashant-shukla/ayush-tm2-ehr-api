@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'AYUSH TM2 & NAMASTE Terminology Search | EHR API',
+  title: 'Sangam: The API for Ayurvedic Interoperability',
   description:
-    'Multilingual Fuzzy Search Engine & EHR Terminology microservice mapping AYUSH NAMASTE codes to WHO ICD-11 Traditional Medicine Module 2 (TM2) for ABDM-compliant health systems.',
+    'Connecting Ayurveda with the language of Modern Healthcare',
 };
 
 export default function RootLayout({
